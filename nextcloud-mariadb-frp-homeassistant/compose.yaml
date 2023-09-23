@@ -3,6 +3,12 @@ version: '2'
 volumes:
   nextcloud_data:
   db_data:
+  frps_config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/docker-config/frp/frps.ini #NOTE needs full path (~ doesn't work)
+      o: bind
 
 services:
   mariadb:
@@ -34,3 +40,10 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nopepsi
       - MYSQL_HOST=db
+
+  frps:
+    images: snowdreamtech/frps
+    restart: always
+    network_mode: "host"
+    volumes:
+      - frps_config:/etc/frp/frps.ini

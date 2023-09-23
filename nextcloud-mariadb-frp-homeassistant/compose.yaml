@@ -8,7 +8,7 @@ services:
   mariadb:
     image: mariadb:10.6
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False
     ports:
       - 3306:3306
     volumes:
@@ -19,9 +19,7 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nopepsi
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
-    command: '--performance_schema off'
       
-
   nextcloud:
     image: nextcloud_data:production-apache
     restart: always

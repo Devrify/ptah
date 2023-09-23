@@ -39,7 +39,7 @@ services:
 
   frps:
     container_name: "frps"
-    images: snowdreamtech/frps
+    image: snowdreamtech/frps
     restart: always
     network_mode: "host"
     volumes:

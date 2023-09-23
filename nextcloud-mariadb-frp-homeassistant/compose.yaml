@@ -3,15 +3,10 @@ version: '2'
 volumes:
   nextcloud_data:
   db_data:
-  frps_config:
-    driver: local
-    driver_opts:
-      type: none
-      device: /root/docker-config/frp/frps.ini #NOTE needs full path (~ doesn't work)
-      o: bind
 
 services:
   mariadb:
+    container_name: "mariadb"
     image: mariadb:10.6
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False
@@ -27,6 +22,7 @@ services:
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
       
   nextcloud:
+    container_name: "nextcloud"
     image: nextcloud_data:production-apache
     restart: always
     ports:
@@ -42,8 +38,20 @@ services:
       - MYSQL_HOST=db
 
   frps:
+    container_name: "frps"
     images: snowdreamtech/frps
     restart: always
     network_mode: "host"
     volumes:
-      - frps_config:/etc/frp/frps.ini
+      - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /PATH_TO_YOUR_CONFIG:/config
+    restart: unless-stopped
+    privileged: true
+    network_mode: host

@@ -23,7 +23,7 @@ services:
       
   nextcloud:
     container_name: "nextcloud"
-    image: nextcloud_data:production-apache
+    image: nextcloud:production-apache
     restart: always
     ports:
       - 8080:80

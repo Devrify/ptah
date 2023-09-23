@@ -28,7 +28,7 @@ services:
     ports:
       - 8080:80
     links:
-      - db
+      - mariadb
     volumes:
       - nextcloud:/var/www/html
     environment:
@@ -46,7 +46,7 @@ services:
       - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini
 
   homeassistant:
-    container_name: homeassistant
+    container_name: "homeassistant"
     image: "ghcr.io/home-assistant/home-assistant:stable"
     environment:
       - TZ=Asia/Shanghai

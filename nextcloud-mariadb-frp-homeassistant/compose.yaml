@@ -38,6 +38,19 @@ services:
       - MYSQL_USER=nopepsi
       - MYSQL_HOST=mariadb
       - NEXTCLOUD_HOSTNAME= # ip address or host name
+      
+  homeassistant:
+    container_name: "homeassistant"
+    image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
+    environment:
+      - TZ=Asia/Shanghai
+    links:
+      - mariadb
+    volumes:
+      - /root/docker-config/homeassistant:/config # fill with correspond location on server
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
 
   frps:
     container_name: "frps"
@@ -46,14 +59,3 @@ services:
     network_mode: "host"
     volumes:
       - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini # fill with correspond location on server
-
-  homeassistant:
-    container_name: "homeassistant"
-    image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
-    environment:
-      - TZ=Asia/Shanghai
-    volumes:
-      - /root/docker-config/homeassistant:/config # fill with correspond location on server
-    restart: unless-stopped
-    privileged: true
-    network_mode: host

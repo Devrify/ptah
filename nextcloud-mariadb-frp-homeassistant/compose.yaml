@@ -7,7 +7,7 @@ volumes:
 services:
   mariadb:
     container_name: "mariadb"
-    image: mariadb:10.6
+    image: mariadb:10.11.5
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False
     ports:
@@ -23,7 +23,7 @@ services:
       
   nextcloud:
     container_name: "nextcloud"
-    image: nextcloud:production-apache
+    image: nextcloud:stable-apache
     restart: always
     ports:
       - 8080:80
@@ -39,7 +39,7 @@ services:
 
   frps:
     container_name: "frps"
-    image: snowdreamtech/frps
+    image: snowdreamtech/frps:0.51.3
     restart: always
     network_mode: "host"
     volumes:

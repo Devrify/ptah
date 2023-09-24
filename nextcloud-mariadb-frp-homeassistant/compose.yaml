@@ -47,7 +47,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /root/docker-config/homeassistant:/config # fill with correspond location on server
+      - /root/docker-config/homeassistant/configuration.yaml:/config/configuration.yaml # fill with correspond location on server
     restart: unless-stopped
     privileged: true
     network_mode: host

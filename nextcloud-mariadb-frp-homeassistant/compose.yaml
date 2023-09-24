@@ -51,6 +51,8 @@ services:
     image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
     environment:
       - TZ=Asia/Shanghai
+    volumes:
+      - /root/docker-config/homeassistant:/config # fill with correspond location on server
     restart: unless-stopped
     privileged: true
     network_mode: host

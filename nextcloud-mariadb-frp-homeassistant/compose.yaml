@@ -44,7 +44,7 @@ services:
     image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
     environment:
       - TZ=Asia/Shanghai
-    links:
+    depends_on:
       - mariadb
     volumes:
       - /root/docker-config/homeassistant:/config # fill with correspond location on server

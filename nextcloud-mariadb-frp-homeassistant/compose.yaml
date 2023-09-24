@@ -35,7 +35,7 @@ services:
       - MYSQL_PASSWORD=
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nopepsi
-      - MYSQL_HOST=db
+      - MYSQL_HOST=mariadb
 
   frps:
     container_name: "frps"

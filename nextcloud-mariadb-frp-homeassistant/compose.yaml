@@ -44,7 +44,7 @@ services:
     restart: always
     network_mode: "host"
     volumes:
-      - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini
+      - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini # fill with correspond location on server
 
   homeassistant:
     container_name: "homeassistant"

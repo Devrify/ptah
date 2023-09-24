@@ -50,8 +50,6 @@ services:
     image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
     environment:
       - TZ=Asia/Shanghai
-    volumes:
-      - /PATH_TO_YOUR_CONFIG:/config
     restart: unless-stopped
     privileged: true
     network_mode: host

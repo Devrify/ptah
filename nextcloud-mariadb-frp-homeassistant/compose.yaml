@@ -47,7 +47,7 @@ services:
 
   homeassistant:
     container_name: "homeassistant"
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
     environment:
       - TZ=Asia/Shanghai
     volumes:

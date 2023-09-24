@@ -15,8 +15,8 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_PASSWORD=
+      - MYSQL_ROOT_PASSWORD= # recommend only number and a-z, A-Z
+      - MYSQL_PASSWORD= # recommend only number and a-z, A-Z
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nopepsi
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
@@ -32,13 +32,11 @@ services:
     volumes:
       - nextcloud_data:/var/www/html
     environment:
-      - MYSQL_PASSWORD=
+      - MYSQL_PASSWORD= # stay with the above setting
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nopepsi
       - MYSQL_HOST=mariadb
-      - NEXTCLOUD_HOSTNAME=
-      - NEXTCLOUD_ADMIN_USER=nopepsi
-      - NEXTCLOUD_ADMIN_PASSWORD= 
+      - NEXTCLOUD_HOSTNAME= # ip address or host name
 
   frps:
     container_name: "frps"

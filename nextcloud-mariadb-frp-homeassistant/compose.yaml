@@ -9,7 +9,7 @@ services:
     container_name: "mariadb"
     image: mariadb:10.11.5
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False --bind-address=0.0.0.0
     ports:
       - 3306:3306
     volumes:

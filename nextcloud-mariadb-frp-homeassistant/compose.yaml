@@ -3,6 +3,7 @@ version: '2'
 volumes:
   nextcloud_data:
   db_data:
+  mosquitto_data:
 
 services:
   mariadb:
@@ -59,3 +60,13 @@ services:
     network_mode: "host"
     volumes:
       - /root/docker-config/frp/frps.ini:/etc/frp/frps.ini # fill with correspond location on server
+
+  mosquitto:
+    container_name: "mosquitto"
+    image: eclipse-mosquitto:2
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - /root/docker-config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf

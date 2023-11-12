@@ -1,2 +1,3 @@
 # ptah
-a collection of useful docker-compose-file
+Ptah was the creator god who spoke the primordial mound from which all other life rose into existence.
+Collection of useful docker-compose-file， wsl image， lightweight deploy tool......

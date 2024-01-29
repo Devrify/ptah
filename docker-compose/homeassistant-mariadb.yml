@@ -1,0 +1,40 @@
+version: '2'
+
+volumes:
+  db_data:
+
+services:
+  mariadb:
+    container_name: "mariadb"
+    image: mariadb:10.11.5
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --performance_schema=False --bind-address=0.0.0.0
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - /root/docker-config/mariadb/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql # database init sql
+    environment:
+      - MYSQL_ROOT_PASSWORD= # recommend only number and a-z, A-Z
+      - MYSQL_PASSWORD= # recommend only number and a-z, A-Z
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nopepsi
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+      
+  homeassistant:
+    container_name: "homeassistant"
+    image: ghcr.nju.edu.cn/home-assistant/home-assistant:stable
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - mariadb
+    volumes:
+      - /root/docker-config/homeassistant/configuration.yaml:/config/configuration.yaml # fill with correspond location on server
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    ports:
+      - 1883:1883
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - /root/docker-config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf

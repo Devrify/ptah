@@ -1,0 +1,20 @@
+version: '2'
+
+volumes:
+  tailscale_data:
+
+services:
+  tailscale:
+    container_name: "tailscale"
+    hostname: nopepsi-laptop
+    image: tailscale/tailscale:latest
+    volumes:
+      - tailscale_data:/var/lib # State data will be stored in this directory
+      - /dev/net/tun:/dev/net/tun # Required for tailscale to work
+    cap_add: # Required for tailscale to work
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - TS_AUTHKEY= # with corrspond key
+    network_mode: "host"
+    restart: unless-stopped

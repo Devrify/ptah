@@ -1,5 +1,8 @@
 version: '2'
 
+volumes:
+    v2raya_data:
+
 services:
     v2raya:
         restart: always
@@ -14,5 +17,5 @@ services:
         volumes:
             - /lib/modules:/lib/modules:ro
             - /etc/resolv.conf:/etc/resolv.conf
-            # - /etc/v2raya:/etc/v2raya
+            - v2raya_data:/etc/v2raya
         image: mzz2017/v2raya

@@ -9,8 +9,8 @@ services:
         environment:
             - V2RAYA_LOG_FILE=/tmp/v2raya.log
             - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
-            - V2RAYA_NFTABLES_SUPPORT=off
-            - IPTABLES_MODE=iptables
+            - V2RAYA_NFTABLES_SUPPORT=on # 启用 nft tables 支持， 如果设置为 off，则下一项需要指定 iptables 或者 legacy
+            # - IPTABLES_MODE=iptables
         volumes:
             - /lib/modules:/lib/modules:ro
             - /etc/resolv.conf:/etc/resolv.conf

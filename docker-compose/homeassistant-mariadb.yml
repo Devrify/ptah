@@ -35,6 +35,3 @@ services:
     network_mode: host
     ports:
       - 1883:1883
-    volumes:
-      - mosquitto_data:/mosquitto/data
-      - /root/docker-config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf

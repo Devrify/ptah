@@ -16,5 +16,6 @@ services:
       - NET_RAW
     environment:
       - TS_AUTHKEY= # with corrspond key
+      - TS_STATE_DIR=/var/lib/tailscale
     network_mode: "host"
     restart: unless-stopped

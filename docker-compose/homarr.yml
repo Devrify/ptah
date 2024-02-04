@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - homarr_icon_config:/app
+      - homarr_icon_config:/app # volumes for both /app/data/configs and /app/public/icons
       - homarr_data:/data
     ports:
       - '7575:7575'

@@ -2,7 +2,8 @@ version: '3'
 
 volumes:
   homarr_data:
-  homarr_icon_config:
+  homarr_icon:
+  homarr_config:
 
 services:
   homarr:
@@ -11,7 +12,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - homarr_icon_config:/app # volumes for both /app/data/configs and /app/public/icons
+      - homarr_config:/app/data/configs
+      - homarr_icon:/app/public/icons
       - homarr_data:/data
     ports:
       - '7575:7575'

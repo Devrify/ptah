@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes:
     v2raya_data:
@@ -7,7 +7,6 @@ services:
     v2raya:
         restart: always
         privileged: true
-        network_mode: host
         container_name: v2raya
         environment:
             - V2RAYA_LOG_FILE=/tmp/v2raya.log
@@ -18,4 +17,7 @@ services:
             - /lib/modules:/lib/modules:ro
             - /etc/resolv.conf:/etc/resolv.conf
             - v2raya_data:/etc/v2raya
+        ports:
+            - "2017:2017"
+            - "20170-20173:20170-20173"
         image: mzz2017/v2raya

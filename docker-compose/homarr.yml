@@ -12,7 +12,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
       - homarr_icon_config:/app
-      - homarr_icon_config:/app
       - homarr_data:/data
     ports:
       - '7575:7575'

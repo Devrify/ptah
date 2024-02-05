@@ -19,5 +19,5 @@ services:
             - v2raya_data:/etc/v2raya
         ports:
             - "2017:2017"
-            - "20170-20173:20170-20173"
+            - "20170-20174:20170-20174"
         image: mzz2017/v2raya

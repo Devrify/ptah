@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    derper:
+        container_name: derper
+        restart: always
+        volumes:
+            - /root/houance.site-cert:/app/certs
+        environment:
+            - DERP_DOMAIN=www.houance.site
+            - DERP_CERT_MODE=manual
+            - DERP_VERIFY_CLIENTS=true
+        ports:
+            - 3478:3478/udp
+            - 443:443
+            - 80:80
+        image: fredliang/derper

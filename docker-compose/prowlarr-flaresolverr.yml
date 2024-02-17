@@ -28,4 +28,3 @@ services:
         - "8191:8191"
       restart: unless-stopped 
       network_mode: "container:prowlarr"
-      depends_on: prowlarr

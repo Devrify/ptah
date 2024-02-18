@@ -12,12 +12,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Shanghai
-      - WEBUI_PORT=10080
+      - WEBUI_PORT=10090
     volumes:
       - qbittorrent_config:/config
       - qbittorrent_data:/downloads
     ports:
-      - 10080:10080
+      - 10080:10090
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped

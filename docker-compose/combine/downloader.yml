@@ -1,0 +1,68 @@
+version: '3'
+
+volumes:
+  prowlarr_config:
+  qbittorrent_config:
+  lidarr_config:
+
+networks:
+  downloader_network:
+
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - prowlarr_config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+    networks:
+      downloader_network:
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TIMEZONE}
+    restart: unless-stopped
+    network_mode: "service:prowlarr"
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+      - WEBUI_PORT=10090
+    volumes:
+      - qbittorrent_config:/config
+      - /var/docker-mount-folder/downloader/torrent:/downloads
+    ports:
+      - 10090:10090
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+    networks:
+      downloader_network:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - lidarr_config:/config
+      - /var/docker-mount-folder/downloader:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+    networks:
+      downloader_network:

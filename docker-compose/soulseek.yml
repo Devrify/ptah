@@ -4,10 +4,14 @@ services:
         container_name: soulseek
         restart: unless-stopped
         volumes:
-            - /var/docker-mount-folder/downloader/soulseek:/data
+            - /var/docker-mount-folder/downloader/soulseek/appdata:/data/.SoulseekQt
+            - /var/docker-mount-folder/downloader/soulseek/downloads:/data/Soulseek Downloads
+            - /var/docker-mount-folder/downloader/soulseek/logs:/data/Soulseek Chat Logs
+            - /var/docker-mount-folder/downloader/media/music:/data/Soulseek Shared Folder
         environment:
             - PGID=${USER_ID}
             - PUID=${GROUP_ID}
         ports:
             - 6080:6080
+            - 51855:51855
         image: realies/soulseek

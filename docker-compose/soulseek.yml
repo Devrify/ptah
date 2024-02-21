@@ -1,0 +1,13 @@
+version: '2'
+services:
+    soulseek:
+        container_name: soulseek
+        restart: unless-stopped
+        volumes:
+            - /var/docker-mount-folder/downloader/soulseek:/data
+        environment:
+            - PGID=${USER_ID}
+            - PUID=${GROUP_ID}
+        ports:
+            - 6080:6080
+        image: realies/soulseek
